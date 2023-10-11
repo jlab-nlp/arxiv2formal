@@ -1,2 +1,2 @@
-# arxiv2formal
-Arxiv2formal dataset for formalized math
+# arXiv2Formal
+arXiv2Formal dataset for formalized math
