@@ -1,0 +1,673 @@
+,arxiv_id,latex,fixed
+0,1411.5342,"\begin{theorem} $\mathrm{(Liouville)}$
+\label{thm:Liouville}
+{\it Let $a$, $b$, and $c$ be positive integers with $a\le b \le c.$ Then every $n\in\mathbb{N}_0$ can be written as $a t_{x}+b t_{y}+c t_{z}$ for $x,y,z\in\mathbb{N}_0$ if and only if $(a,b,c)$ is among the following vectors:
+$$
+(1,1,1), (1,1,2), (1,1,4), (1,1,5), (1,2,2), (1,2,3), (1,2,4).
+$$
+}
+\end{theorem}","theorem Liouville
+  (a b c : ℕ)
+  (hab : a ≤ b)
+  (hbc : b ≤ c) :
+  ∀ (n : ℕ₀), 
+  (∃ (x y z : ℕ), n = a * t x + b * t y + c * t z)
+  ↔ ((a, b, c) = (1, 1, 1) ∨ (a, b, c) = (1, 1, 2) ∨ (a, b, c) = (1, 1, 4) ∨ (a, b, c) = (1, 1, 5) ∨ (a, b, c) = (1, 2, 2) ∨ (a, b, c) = (1, 2, 3) ∨ (a, b, c) = (1, 2, 4))
+  := sorry"
+2,1411.5342,"\begin{theorem}
+\label{thm:a-c}
+{\it
+For fixed positive integers $a$ and $c$, set
+$$
+g^{a}_c(x,y,z)=at_x+c(y^2+yz+z^2), \,\,\textrm{with} \,\,x\in\mathbb{N}_0, \,\,y,z\in\mathbb{Z}.
+$$
+\begin{enumerate}\itemsep=0pt
+\item[$(1)$]
+The form $g^{a}_c$ represents all $n\in\mathbb{N}_0$ if and only if $(a,c)=(1,1).$
+\item[$(2)$]
+If the form $g^{a}_c$ represents $n=1,2,4,8$, it represents all $n\in\mathbb{N}_0$.
+\end{enumerate}
+}
+\end{theorem}","theorem a_c
+  (a c : ℕ)
+  (g_a_c := λ (x : ℕ₀) (y z : ℤ), a * t x + c * (y^2 + y*z + z^2) ) :
+  (∀ (n : ℕ), represents g_a_c n ↔ ((a, c) = (1, 1)))
+  ∧ (∀ (n : ℕ₀), (represents g_a_c 1 ∧ represents g_a_c 2 represents g_a_c 4 ∧ represents g_a_c 8) → represents g_a_c n)
+  := sorry"
+4,1411.5342,"\begin{theorem}
+\label{thm:relation}
+{\it Let $n\in\mathbb{N}_0.$ Then,
+$$
+r_{1,1,3}(8n+5)=16 t_{1,1,3}(n).
+$$
+}
+\end{theorem}","theorem relation
+  (n : ℕ) :
+  r_1_1_3 (8 * n + 5) = 16 * t_1_1_3 n
+  := sorry"
+20,1411.5342,"\begin{lemma}
+\label{lem-1,24,72}
+{\it A nonnegative integer $n\in\mathbb{N}_0$ can be written as $x^2+24y^2+72z^2$ for $x,y,z\in\mathbb{Z}$ if and only if $n\neq 3l+2, 4l+2, 4l+3, 9l+3, 4^k(8l+5)$, where $k,l\in\mathbb{N}_0.$
+}
+\end{lemma}","
+lemma lemma_one_twenty_four_seventy_two
+  (n : ℕ) (hn : n ≥ 0):
+  ∃ (x y z : ℤ), n = x^2 + 24*y^2 + 72*z^2
+  ↔ ¬ (∀ (k l : ℕ), n = 3*l + 2 ∨ n = 4*l + 2 ∨ n = 4*l + 3 ∨ n = 9*l + 3 ∨ ∃ (k : ℕ), n = 4^k * (8*l + 5))
+  := sorry"
+0,1103.1698,"\begin{theorem}\label{K-S-theorem}[Khintchine-Sullivan theorem]
+For all $x \in V$, and almost every $v \in T_x V$,
+$$ \limsup_{t \to \infty} \frac{\dist v(t)}{\log t}  = 1/d.$$
+\end{theorem}","theorem khintchine_sullivan_theorem
+  (x : V) :
+  ∀! (v : T x V), limsup (λ t, (dist (v t)) / (log t)) at_top = 1/d
+  := sorry"
+1,1103.1698,"\begin{theorem}\label{KG}[Khintchine's theorem]
+$\mathcal{W}_{1 \times 1}(\psi, \R)$ has zero or full measure according as
+\begin{equation}\label{grosum}
+\sum_{x = 1}^{\infty} \psi(x)
+\end{equation}
+\noindent converges or diverges.
+\end{theorem}","theorem khintchine_theorem :
+  (summable (λ x : ℕ, ψ x) →  zero_measure (W_1_1_ψ_ℝ))
+  ∧ (¬ summable (λ x : ℕ, ψ x) → full_measure (W_1_1_ψ_ℝ))
+  := sorry"
+2,1103.1698,"\begin{theorem}\label{theorem-volumes}
+The functions $\Delta$ and $d(x_0, \cdot)$ are $\DL$.
+\end{theorem}","theorem theorem_volumes :
+  is_DL delta ∧ is_DL (λ x, d x_0 x) := sorry"
+3,1103.1698,"\begin{theorem}\label{km1.8}
+Let  $\scF = \{f_n~|~n \in \N\}$ be a sequence of elements of $G$ satisfying
+\begin{equation}\label{ED}
+\sup_{m \in \N} \sum_{n = 1}^{\infty} \|f_n \fmi\|^{-\beta} < \infty~\forall~\beta > 0,
+\end{equation}
+\noindent and let $\Delta$ be a $\DL$ function on $\Upsilon$. Then
+\begin{equation}\mathcal{B}(\Delta) := \left\{ \{ x \in \Upsilon~|~\Delta(x) \geq s^n\}~|~n \in \mathbb{Z} \right\}\end{equation}
+\noindent is Borel-Cantelli for $\scF$.
+\end{theorem}","theorem km1_8
+  (f : ℕ → G)
+  (hf : ∀ (β : ℝ) (hβ : β > 0), (sup m, (∑' (n : ℕ) (hn : n ≥ 1), (norm (f n) * (has_inv.inv (f m))) ^ (-β))) < ∞)
+  (Δ : Υ → ℝ) (hΔ : is_UDL Δ) :
+  is_borel_cantelli {({x : Υ | (Δ x ≥ s^n')}) | n : ℤ} f
+  := sorry"
+11,1103.1698,"\begin{lemma}\label{BClemma2}
+Let $\scH$ be a sequence of functions on $(G/\Gamma, \mu)$.  Then
+$$\liminf_{N \to \infty}\frac{S_{\scH, N}(x)}{E_{\scH, N}} < \infty~\text{for}~\mu~\text{almost every}~x \in G/\Gamma.$$
+\noindent In particular, $\scH$ is summable whenever $S_{\scH, \infty}$ is finite almost everywhere.
+\end{lemma}","lemma bc_lemma_two
+  {G : Type*} [group G]
+  {Γ : lattice G}
+  (μ : haar_measure G/Γ)
+  (H : ℕ → (G/Γ → ℝ))
+  (S_H : λ (N : ℕ), (λ x, (∑ n in finset.range N, (H n) x)))
+  (E_H : λ (N : ℕ), (∑ n in finset.range N, (integral μ (H n)))) :
+  ∀ (x : G),
+  ∃ (nX : set G) (measure nX = 0),
+  (x ∉ nX) → (liminf (λ N, (S_H N x) / (E_H N)) < ∞)
+  ∧ (finite_almost_everywhere (S_H ∞) → summable H) := sorry"
+26,1103.1698,"\begin{theorem}\label{H-measure}
+Let $f$ be a dimension function such that $x^{-n}f(x)$ is a decreasing function which tends to $\infty$ as $x$ tends to $0$. Assume that
+\begin{equation}\label{H-sum-div}
+\sum_{r = 1}^{\infty} f(\psi(r))\psi(r)^{-(n-1)} = \infty.
+\end{equation}
+\noindent Then
+$$\cH^{f}(\{\Lambda \in \SL_{n}(k)/\SL_{n}(Z)~:~\Lambda~\text{is}~(\psi, n)~\text{approximable}\}) = \infty.$$
+\end{theorem}","theorem h_measure
+  {k : Type*}
+  [field k]
+  (f : ℝ → ℝ)
+  [dimension_function f]
+  (hf : ∀ n : ℕ, is_decreasing (λ x, x^(-n) * (f x)))
+  (hf' : ∀ (n : ℕ), limit 0 (λ x, x^(-n) * (f x)) = ∞)
+  (ψ : ℝ → ℝ)
+  (n : ℕ) (hn : n > 1) :
+  is_infinity (∑ (r : ℕ), ((f (ψ r)) * (ψ r)^(-(n-1))))
+  → Hf {(Λ : (sl_n k) / (sl_n Z)) | is_approximable Λ ψ n} = ∞
+  := sorry"
+0,2107.08307,"\begin{theorem}
+For any $n\in\mathbb{Z}$, the state probability $q(n,t)=\mathrm{Pr}\{\mathcal{S}(t)=n\}$ of GSP is given by
+\begin{equation}\label{qkl11}
+q(n,t)=e^{-(\Lambda+\bar{\Lambda})t}\left(\Lambda/\bar{\Lambda}\right)^{n/2}I_{|n|}\left(2t\sqrt{\Lambda \bar{\Lambda}}\right).
+\end{equation}
+\end{theorem}","theorem gsp_state_probability
+  (q := λ n t, Pr (S t) n) :
+  ∀ n t, q n t = exp (-(Λ + Λ̄) * t) * ((Λ / Λ̄) ^ (n / 2)) * (I (abs n) (2 * t * sqrt (Λ * Λ̄)))
+  := sorry"
+1,2107.08307,"\begin{proposition}
+The state probabilities $q^{\alpha}(n,t)=\mathrm{Pr}\{\mathcal{S}^{\alpha}(t)=n\}$, $n\in \mathbb{Z}$ of  GFSP solves the following system of fractional differential equations:
+\begin{equation}\label{pmf}
+\partial_{t}^{\alpha}q^{\alpha}(n,t)=\Lambda\left(q^{\alpha}(n-1,t)-q^{\alpha}(n,t)\right)-\bar{\Lambda}\left(q^{\alpha}(n,t)-q^{\alpha}(n+1,t)\right),
+\end{equation}
+with initial conditions $q^{\alpha}(0,0)=1$ and $q^{\alpha}(n,0)=0, \ n\neq0$.
+\end{proposition}","theorem proposition_pmf
+  (q_α := λ n t, Pr (S α t) n) :
+  ∀ n t, ((fractional_derivative t α) q_α n t = exp (-(Λ + Λ̄) * t) * ((Λ / Λ̄) ^ (n / 2)) * (I (abs n) (2 * t * sqrt (Λ * Λ̄))))
+        ∧ (q_α 0 0 = 1) 
+        ∧ (n ≠ 0 → q_α n 0 = 0)
+  := sorry"
+2,2107.08307,"\begin{proposition}
+The pgf of GFSP  is given by
+\begin{equation}\label{pgf}
+G^{\alpha}_{\mathcal{S}}(u,t)=        E_{\alpha,1}\left(\sum_{j=1}^{k}\left(\lambda_{j}(u^{j}-1)+\mu_{j}(u^{-j}-1)\right)t^{\alpha}\right).
+\end{equation}
+\end{proposition}","lemma proposition_pgf
+  (G := pgf_of_gfsp) :
+  \forall u t, G α S u t = E α 1 (∑ j in finset.Icc 1 k, (lambda j  * (u^j - 1) + μ j * (u^(-j) - 1)) * t^α))
+  := sorry "
+3,2107.08307,"\begin{proposition}\label{p3.3}
+The $r$th factorial moment of GFSP, that is, $\Psi^\alpha(r,t)=        \mathbb{E}(\mathcal{S}^{\alpha}(t)(\mathcal{S}^{\alpha}(t)-1)\cdots(\mathcal{S}^{\alpha}(t)-r+1))$, $r\ge1$, is given by
+\begin{equation*}
+\Psi^\alpha(r,t)=r!\sum_{n=1}^{r}\frac{t^{n\alpha}}{\Gamma(n\alpha+1)}\underset{m_i\in\mathbb{N}}{\underset{\sum_{i=1}^nm_i=r}{\sum}}\prod_{\ell=1}^{n}\left(\frac{1}{m_\ell!}\sum_{j=1}^{k}\left((j)_{m_\ell}\lambda_{j}+(-1)^{m_\ell}j^{(m_\ell)}\mu_{j}\right)\right),
+\end{equation*}
+where $(j)_{m_\ell}=j(j-1)\cdots(j-m_\ell+1)$ denotes the falling factorial and $j^{(m_\ell)}=j(j+1)\cdots(j+m_\ell-1)$ denotes the rising factorial.
+\end{proposition}","lemma p3_3
+  (r : ℕ) (hr : r ≥ 1) (ψ := rth_factorial_moment_of_gfsp r):
+  ∀ t, ψ α r t = factorial r * (∑ n in finset.Icc 1 r , ( (t^(n*α)/(Γ (n*α + 1))) * ∑ m in {m' : (finset.Icc 1 n) → ℕ ∣ (∑ i in finset.Icc 1 n, m' i) = r},  ∏ l in finset.Icc 1 n, ((1 / (factorial (m l))) * ∑ j in finset.Icc 1 k, (falling_factorial j (m l) * lambda j) + ((-1)^(m l) * rising_factorial j (m l) * μ j)) ))
+  := sorry"
+4,2107.08307,"\begin{proposition}
+The GFSP exhibits the LRD property.
+\end{proposition}","lemma lrd_property_gfsp :
+  lrd_property GFSP := sorry"
+5,2107.08307,"\begin{proposition}
+The one-dimensional distributions of GFSP are not infinitely divisible.
+\end{proposition}","lemma proposition_not_infinitely_divisble :
+  not_infinitely_divisible GFSP 1 := sorry  "
+6,2107.08307,"\begin{theorem}\label{thm1}
+The pmf $p_{f}(n,t)=\mathrm{Pr}\{\mathcal{Z}_{f}(t)=n\}$ of TCGCP-I is given by
+\begin{equation}\label{fd12dfqq}
+p_{f}(n,t)=\sum_{\Omega(k,n)}\prod_{j=1}^{k}\frac{\lambda_{j}^{x_{j}}}{x_{j}!}\mathbb{E}\left(e^{-\Lambda D_{f}(t)}D_{f}^{s_{k}}(t)\right),\ \ n\geq0,
+\end{equation}
+where $s_{k}=x_{1}+x_{2}+\dots+x_{k}$ and $\Omega(k,n)$ is as given in (\ref{p(n,t)}).
+\end{theorem}","theorem thm1 
+  (p := λ f n t, ∑ x in Ω k n, (∏ j in finset.Icc 1 k, (lambda j)^(x j) / (factorial (x j)) * expected_value (exp (-Λ * D f t) * (D f t)^(∑ i in finset.Icc 1 k, x i)))) : 
+  is_pmf_of_TCGCP_I p
+  := sorry"
+7,2107.08307,"\begin{proposition}
+The pgf of TCGCP-I is given by
+\begin{equation}\label{pgff}
+G_{f}(u,t)=\exp\left\{-tf\left(\sum_{j=1}^{k}\lambda_{j}(1-u^{j})\right)\right\},\ \ |u|\le1.
+\end{equation}
+\end{proposition}","lemma pgf_tcgcp_i
+  (G := λ f u t (hu : abs u ≤ 1), exp (-t * f (∑ j in finset.Icc 1 k, (lambda j) * (1 - u^j)))) :
+  is_pgf_TCGCP_I G
+  := sorry 
+"
+8,2107.08307,"\begin{theorem}
+Let $f$ be a Bern\v stein function  associated with L\'evy subordinator $\{D_{f}(t)\}_{t\ge0}$ such that $\lim_{x\rightarrow 0+}f(\lambda x)/f(x)=\lambda^\theta$, $\lambda>0$ which implies that it is regularly varying at 0+ with index $0<\theta<1$. Also, let
+\begin{equation*}
+g(t)=\frac{\log\log t}{\phi(t^{-1}\log\log t)},\ \ t>e,
+\end{equation*}
+where $\phi$ is the inverse of $f$. Then,
+\begin{equation}\label{lil}
+\liminf_{t\rightarrow\infty}\frac{\mathcal{Z}_{f}^{\alpha}(t)}{(g(t))^{\alpha}}\stackrel{d}{=}\sum_{j=1}^{k}j\lambda_{j} Y_{\alpha}(1)\theta^\alpha\left(1-\theta\right)^{\alpha(1-\theta)/\theta}.
+\end{equation}
+\end{theorem}","theorem lil
+  (f : bernstein_function)
+  (D_f : levy_subordinator f)
+  (θ : ℝ) (hθ : 0 < θ ∧ θ < 1)
+  (hf: ∀ lambda (hlambda : lambda > 0), (limit_from_above (λ x, (f (lambda * x)) / (f x)) 0 = lambda^θ))
+  (g := λ t (ht: t > exp 1), (log (log t)) / ((inverse f) (t^(-1) * (log (log t))))) :
+  liminf_d (λ t, (Z f α t) / (g t)^α) at_top ∑ j in finset.Icc 1 k, j * (lambda j) * (Y α 1) * θ^α * (1 - θ)^(α * (1 - θ) / θ)
+  := sorry 
+"
+9,2107.08307,"\begin{theorem}
+Let $m$ be a fixed positive integer and $\{X_{j}\}_{j\geq1}$ be a sequence of independent and identically distributed random variables such that
+\begin{equation*}
+\mathrm{Pr}\{X_{1}=n\}=\frac{1}{u(m)}\int_{0}^{\infty}\mathrm{Pr}\{M(s)= n\}\mu(\mathrm{d}s),\ \ n\ge m,
+\end{equation*}
+where $u(m)=\displaystyle\int_{0}^{\infty}\mathrm{Pr}\{M(s)\ge m\}\mu(\mathrm{d}s)$. Then, for $t>0$, we have
+\begin{equation*}
+\lim_{m\to 0}Z_m(t)\stackrel{d}{=}\mathcal{Z}_f(t),
+\end{equation*}
+where $Z_m(t)=X_{1}+X_2+\cdots+X_{N(tu(m)/\Lambda)}$.
+\end{theorem}","theorem theorem_limit_Zm_Zf
+  (m : ℕ)
+  (X : ℕ → ℕ)
+  (hX : iid X)
+  (u : ℕ → ℝ) (hu : u m = ∫ s in Ici 0, (λ s, Pr (M s ≥ m)) ∂μ)
+  (Pr_X : ∀ (n : ℕ) (hn : n ≥ m), Pr (X 1) n = (1 / (u m)) * ∫ s in Ici 0, (λ s, Pr (M s) n) ∂μ)
+  (t : ℝ) (ht: t > 0) 
+  (Z : ℕ → ℝ → ℝ) (hZ: ∑ (i : finset.range N(t * u m / Λ))):
+  limit_d (λ m, Z m t) 0 = Z f t
+  := sorry
+"
+10,2107.08307,"\begin{theorem}
+Let $\mathbb{E}\left(D_f^{i\alpha}(t)\right)\sim k_it^{i\theta}$ for $i=1,2$
+such that  $0< \theta <1$, $k_1>0$ and $k_2\geq k_1^2$. Then, the TCGFCP-I  exhibits the LRD property.
+\end{theorem}","theorem lrd_property 
+  (θ : Ioo 0 1)
+  (k₁ k₂ : ℝ) 
+  (hk₁ : k₁ > 0)
+  (hk₂ : k₂ ≥ k₁^2)
+  (E_D_f_1 : sim (λ t, expected_value (D_f α t)) (λ t, k_1 * t^θ))
+  (E_D_f_2 : sim (λ t, expected_value (D_f 2*α t)) (λ t, k_1 * t^(2*θ))) : 
+  lrd_property TCGFCP_I 
+  := sorry 
+"
+0,2104.03526,"\begin{proposition}\label{lem:koszul-nullity}
+Let $\pd_i = \deg(p_i)$. Using the notation of this section, the nullity of $\begin{bmatrix}
+A_k & B_k N_k
+\end{bmatrix}$ is
+\begin{align}
+\nullity\left(\begin{bmatrix}
+A_k & B_k N_k
+\end{bmatrix}\right) & =  \nullitymac{d_{k+1}}\label{eq:nullity}\\
+&= \sum_{j=0}^n (-1)^j \sum_{i_1<\cdots<i_j} \binom{n+d_{k+1} - \sum_{\ell=1}^j \pd_{i_\ell}}{n},\notag
+\end{align}
+where  we set $\binom{a}{b} = 0$ unless $a,b\ge 0$ and $a\ge b$.  Moreover, \[
+\nullitymac{\dMac} = \nullitymac{\dMac-1} = r = \prod_{i=1}^n \pd_i,
+\]
+where $\dMac$ is given in Equation~\eqref{eq:dmac}.
+\end{proposition}","lemma koszul_nullity
+  (b : finset.range n → ℕ := λ i, deg (p i)):
+  nullity (matrix_concat (A k) (B k * N k)) = nullity (Mac (d (k+1))
+  ∧ nullity (matrix_concat (A k) (B k * N k)) = ∑ j in finset.range n, (-1)^j"
+3,2104.03526,"\begin{lemma}
+For $j=1,\ldots,n$, the eigenpolynomial associated with $\lambda = 0$ of the operator $m_{x_i}:\quotientalgebra\rightarrow \quotientalgebra$ is $$q = \sum_{\iota\subseteq \mathbf I} \det (\varepsilon Q_\iota) \prod_{k\in\iota} x_k$$
+where $\mathbf I = \{1,\ldots,n\}$ denotes the set of possible row and column indices and $Q_\iota$ denotes the matrix formed by removing rows and columns in $\iota\subseteq \mathbf I$ from $Q$.
+\label{lemma: q is of this form}
+\end{lemma}","lemma lemma_q_is_of_this_form
+  {n : ℕ}
+  (Q : matrix (fin n) (fin n) ℝ)
+  (m : Π (i : fin n), linear_map (quotient_algebra Q) (quotient_algebra Q))
+  (q : eigenpolynomial (m (x i)) 0) := 
+  q = (∑ ι : finset (fin n), (det (ε * (remove_rows_and_columns Q ι))) * (∏ k in ι, x k)) :
+  := sorry"
+0,2208.04755,"\begin{prop}[Hulanicki-Reiter condition]\label{prop: Hul-Rei condition}
+Let $G$ be a finitely generated group with finite generating set $S$ and the associated word length metric. Then the following are equivalent:
+\begin{enumerate}
+\item $G$ is amenable;
+\item For any $\varepsilon>0$, there exists a function $f\in \ell^2(G)_{1,+}$ such that $\|f-s\cdot f\|_2\leq \varepsilon$ for any $s\in S$ and $\supp(f)$ is finite.
+\end{enumerate}
+\end{prop}","lemma prop_hulanicki_reiter
+  {G : Type*}
+  [group G]
+  (S : finset G)
+  (hS : finite_generating_set S G)
+  (word_length : word_length_on G S) :
+  (amenable G) ↔ (    
+    ∀ (ε : ℝ) (hε : ε > 0),
+      ∃ (f : G → ℂ) (hf : f ∈ (l2_1_plus G)),
+      (∀ (s : S), (norm_l2 (f - (s • f))) ≤ ε)
+      ∧ (finite_support f))
+  := sorry "
+1,2208.04755,"\begin{prop}\label{prop: uniform Hul-Rei condition}
+Let $\{G_i\}_{i\in I}$ be a family of finitely generated groups with finite generating set $S_i$ such that $\sup_i \sharp S_i<\infty$ and the associated word length metric. Then the following are equivalent:
+\begin{enumerate}
+\item $\{(G_i, S_i)\}_{i\in I}$ is uniformly amenable, \emph{i.e.}, for any $\varepsilon>0$ there exists $D>0$ and a family of functions $\{f_i\}_{i\in I}$ such that each $f_i \in \ell^2(G_i)_{1,+}$ satisfies $\|f_i-s\cdot f_i\|_2\leq \varepsilon$ for $s\in S_i$ and $\supp(f_i) \subseteq B(1_{G_i}, D)$.
+\item For any $R>0$ and $\varepsilon>0$, there exists $D'>0$ and a family of finite subsets $\{F_i\subseteq G_i\}_{i\in I}$ such that $\sharp \partial_R F_i/\sharp F_i \leq \varepsilon$ and $F_i \subseteq B(1_{G_i}, D')$.
+\end{enumerate}
+\end{prop}","lemma prop_uniform_Hul_Rei_condition
+  {I : Type*}
+  (G : I → Type)
+  [∀ i : I, group (G i)]
+  (S : (λ i : I, finset (G i)))
+  (hS : ∀ i : I, finite_generating_set (S i) (G i))
+  (hS_sup : ∃ (C : ℝ), ∀ i : I, (card (S i)) ≤ C)
+  (word_length : Π i, word_length_on (G i) (S i)) :
+  (∀ (ε : ℝ) (hε: ε > 0),
+   ∃ (D: ℝ) (hD: D > 0) (f: (λ i : I, (G i) → ℂ)),
+   ∀ (i : I), 
+   ∀ (s : (S i)), 
+   ((norm_l2 ((f i) - (s • (f i)))) ≤ ε ∧ (∀ i : subset (supp (f i)) (ball (one (G i)) D))))
+  ↔ (∀ (R : ℝ) (hR : R > 0) (ε : ℝ) (hε : ε > 0),
+       ∃ (D' : ℝ) (hD' : D' > 0) (F : (λ i : I, finset (G i))),
+      (∀ i : I, (card (boundary_set R (F i)) / (card (F i))) ≤ ε)
+      ∧ (∀ i : I, subset (F i) (ball (one (G i)) D')))
+  := sorry"
+2,2208.04755,"\begin{prop}[Higson-Roe condition]\label{prop: Hig-Roe condition}
+Let $(X,d)$ be a discrete metric space of bounded geometry. Then the following are equivalent:
+\begin{enumerate}
+\item $(X,d)$ has Property A;
+\item For any $\varepsilon>0$ and $R>0$, there exists a map $\xi: X\to \ell^2(X)_{1,+}$ such that $\xi$ has $(\varepsilon,R)$-variation and there exists a constant $S>0$ such that $\supp(\xi(x)) \subset B(x,S)$ for any $x\in X$.
+\end{enumerate}
+\end{prop}","lemma prop_higson_roe
+  (X : Type*) (d : X → ℝ) [m : discrete_metric_space_bounded_geometry X d]:
+  (property_A m)
+  ↔ (∀ (ε : ℝ) (hε : ε > 0) (R : ℝ) (hR : R > 0),
+      ∃ (ξ : X → (l2_1_plus X)),
+      (has_variation ξ ε R) ∧ (∃ (S: ℝ) (hS: S > 0), ∀ (x : X), (support (ξ x)) ⊆ ball x S))
+  := sorry"
+3,2208.04755,"\begin{lem}\label{lem:existence of cut}
+Let $X$ be a set and $f: X \to [0,1]$ be a function in $\ell^2(X)_{1,+}$ with finite support. Then for any $\varepsilon\in [0,1]$, there exists $c\geq 0$ such that $\|f_c\|_2=\varepsilon$ where $f_c(x):=\min\{f(x), c\}$ for $x\in X$.
+\end{lem}","lemma existence_of_cut
+  {X : set type_X}
+  (f : X → set.Icc 0 1)
+  (hf : f ∈ (l2_1_plus X))
+  (hfs : finite_support f) :
+  ∀ (ε : set.Icc 0 1), 
+  ∃ (c : ℝ) (hc : c ≥ 0), 
+  norm_l2 (λ x, min (f x) c) = ε
+  := sorry"
+6,2208.04755,"\begin{prop}\label{prop:op norm and l1 norm}
+For a finitely generated amenable group $G$ and a function $f \in \ell^1(G)$ with range in $[0,1]$, the operator $T_f$ can be continuously extended to a bounded linear operator on $\ell^2(G)$ with operator norm equals $\|f\|_1^2$.
+\end{prop}","lemma prop_op_norm_and_l1_norm
+  {G : Type*}
+  [group G]
+  [finitely_generated G]
+  [amenable G]
+  (f : G → set.Icc 0 1)
+  (hf : f ∈ l1 G) :
+  ∃ (T_f' : G → range_of_T_f),
+    (T_f' = continuous_extension_of (T f)) 
+    ∧ (T_f' ∈ l2 G) 
+    ∧ (bounded T_f') 
+    ∧ (linear_operator T_f') 
+    ∧ op_norm (T_f') = (norm_1 f)^2
+  := sorry"
+0,0705.1690,"\begin{lem} \label{beta}
+For all $n \geq 1$,
+\[
+\beta_{\alpha,n} \, = \,
+|q_{\alpha, n} x \, - \, p_{\alpha, n}|
+\]
+\end{lem}","lemma beta
+  (n : ℕ) (hn : n ≥ 1):
+  β α n = abs ((q α n) * x - (p α n))
+  := sorry"
+1,0705.1690,"\begin{lem} \label{rho}
+Let $\bar{\alpha}=\max(\alpha,1-\alpha)$, $g=\frac{\sqrt{5}-1}{2}$, $\gamma=\sqrt{2}-1$. Then $\forall n \geq 0$,
+\begin{displaymath}
+\beta_{\alpha,n} \leq \bar{\alpha} \rho_{\alpha}^n, \qquad \frac{1}{q_{\alpha,n+1}}<(1+\alpha)\bar{\alpha} \rho_{\alpha}^n
+\end{displaymath}
+where
+\begin{itemize}
+\item $\rho_{\alpha}=g$, \quad for $g < \alpha \leq 1$
+\item $\rho_{\alpha}=\gamma$, \quad for $\gamma \leq \alpha \leq g$,
+\item $\rho_{\alpha}=\sqrt{1-2\alpha}$, \quad for $0 < \alpha < \gamma$.
+\end{itemize}
+\end{lem}","lemma rho1
+  (α_bar := max α (1 - α))
+  (g : ℝ := (real.sqrt 5 - 1) / 2)
+  (γ : ℝ := (real.sqrt 2 - 1))
+  (ρ : ℝ := if g < α ∧ α ≤ 1 then g 
+            else if γ ≤ α ∧ α ≤ g then γ 
+            else if (0 < α ∧ α < γ) then real.sqrt (1 - 2 * α)) :
+  ∀ (n : ℕ),
+  β α n ≤ α_bar * ρ^n
+  ∧ (1 / (q α (n+1))) < (1 + α) * α_bar * ρ^n
+  := sorry"
+2,0705.1690,"\begin{prop} \label{q_series}
+For any $\alpha, \, 0 < \alpha \le 1$, and for any $u$ satisfying the conditions (\ref{conditions}), there exists a positive
+constant $C_{\alpha, 1}$, depending on $u$, such that $\forall x \in \mathbb{I}_{\alpha}$, $\forall N>0$,
+\[
+\abs{
+B_{\alpha,u}^N(x) - \sum_{n=0}^{N} \frac{u(a_{\alpha, n+1}^{-1})}{q_{\alpha, n}} } < C_{\alpha, 1}
+\]
+where $q_{\alpha,n}$ are the denominators of the $\alpha$-convergents of $x$.
+\end{prop}","lemma q_series
+  (α : Ioc 0 1)
+  (u : Type) (h_conditions : satisfies_conditions u) :
+  ∃ (C_α_1 : ℝ) (hC_α_1 : C_α_1 > 0),
+  ∀ (x : I α) (N : ℕ) (hN : N > 0) (q : demoninators_of_alpha_convergents α x),
+  abs ((B α u N x) - ∑ n in finset.range (N+1), (u (a α (n+1))^(-1)) / (q α n)) < C_α_1
+  := sorry"
+3,0705.1690,"\begin{theo} \label{bounded_difference}
+Let $0 < \alpha \leq 1$ and assume that $u$ satisfies the conditions (\ref{conditions}). Then there
+exists a positive constant $C_{\alpha,2}$, depending on $u$, such that
+\[
+| B_{\alpha,u}(x) \, - \, B_{1,u}(x) | \, < \, C_{\alpha, 2}
+\]
+whenever $B_{1,u}(x) < \infty$.
+\end{theo}","theorem bounded_difference
+  (α : Ioc 0 1)
+  (u : Type) (h_conditions : satisfies_conditions u) :
+  ∃ (C_α_2 : ℝ) (hC_α_2 : C_α_2 > 0),
+  ∀ x,
+  (B 1 u x < ∞) → abs ((B α u x) - (B 1 u x)) < C_α_2
+  := sorry"
+4,0705.1690,"\begin{prop}
+For $\alpha \in (0,1]$, if $u_{\alpha} \in L^p(0,\bar{\alpha})$, then $B_{\alpha,u} \in L^p(\mathbb{T}^1)$.
+\end{prop}","lemma prop_alpha
+  (α : Ioc 0 1 )
+  (hua : u α ∈ Lp p (Ioo 0 (bar α))) :
+  (B α u) ∈ Lp p T1
+  := sorry"
+5,0705.1690,"\begin{lem} \label{lemma1}
+Suppose $x \in \left(0,\frac{1}{2}\right)$ irrational. Then
+\[
+x = \confrac{1}{a_1} + \confrac{1}{a_2 } + \confrac{1}{a_3} +
+\confrac{1}{a_4} + \cdots \, .
+\]
+implies
+\[
+1 - x = \confrac{1}{1} + \confrac{1}{a_1 - 1} + \confrac{1}{a_2} +
+\confrac{1}{a_3} + \cdots \, .
+\]
+\end{lem}","lemma lemma1
+  (x : Ioo 0 (1/2))
+  (a : ℕ → ℕ)
+  (ha : x = continued_fraction_sum a) :
+  1 - x = continued_fraction_sum (λ n, if n = 0 then 1 else if n = 1 then (a 1) - 1 else a (n-1))
+  := sorry"
+9,0705.1690,"\begin{theo} \label{theorem4}
+There exists a fixed constant $C_0$ such that $\forall x \in (0,1)$,
+$$ \abs{B_0(x)-\sum_{n=0}^\infty \frac{\log(b_{n+1}-1)}{q_n^*}}<C_0 .  $$
+\end{theo}","theorem theorem4 :
+  ∃ (C_0 : ℝ),
+  ∀ (x : Ioo 0 1),
+  abs (B_0 x - (∑' n : ℕ, (log (b (n+1) - 1)) / (q_star n))) < C_0
+  := sorry"
+10,0705.1690,"\begin{prop} \label{theorem2}
+For any irrational number $x$, $x$ is a Brjuno number if and
+only if $x$ and $-x$ are semi-Brjuno numbers.
+\end{prop}","lemma theorem_two
+  (x : ℝ) (hx : ¬ is_rational x) :
+  is_brjuno x ↔ (is_semi_brjuno x ∧ is_semi_brjuno (-x)) := sorry"
+11,0705.1690,"\begin{theo} \label{theorem5}
+Let $B_0^+(x)=B_0(x)+B_0(-x)$ be the even part of $B_0$.
+Then the function $B_1(x)-B_0^+(x)$ is bounded.
+\end{theo}","theorem theorem_five
+  (B_0_plus : ℝ → ℝ := λ x, (B_0 x) + (B_0 (-x))) :
+  is_bounded (λ x, (B_1 x) - (B_0_plus x)) := sorry"
+12,0705.1690,"\begin{lem} \label{lemma3}
+There exists a constant $C_1$ such that for any irrational number $x \in (0, 1)$,
+\[
+\abs{ \sum_{n=0}^{\infty} \frac{\log q_{n+1}}{q_n} -
+\sum_{n=0}^{\infty} \frac{\log a_{n+1}}{q_n}} < C_1 .
+\]
+\end{lem}","lemma lemma3 :
+  ∃ (C_1 : ℝ),
+  ∀ (x : Ioo 0 1) (hx : ¬ is_rational x) ,
+  abs ((∑' n : ℕ, (log (q (n+1))) / (q n)) - (∑' n : ℕ, (log (a (n+1))) / (q n))) < C_1
+  := sorry"
+8,1104.5311,"\begin{lemma}
+%\begin{theorem}\label{thm:order-gen}
+On $\tm$:
+\begin{clauseenum}
+\item\label{order-gen-1}
+$x<y$ if and only if $x<_ky$ for some $k$ in $\vnn$;
+\item\label{order-gen-2}
+if $x<y$ and $y<_kz$, then $x<_kz$;
+\item \label{order-gen-3}
+$<$ and $<_k$ are well-founded orderings;
+\item\label{order-gen-4}
+$<$ directs $\predk x$;
+\item\label{order-gen-5}
+$t_k$ is maximal with respect to $<$ in $\predk{\ft}$, assuming $k<n$.
+\end{clauseenum}
+%\end{theorem}
+\end{lemma}","
+lemma order_gen
+  (x y z : tm)
+  (k n : vnn)
+  (hk : le k n) :
+  (le x  y ↔ order_le k x y) 
+  ∧ (le x y ∧ order_le k y z → order_le  k x z)
+  ∧ (well_founded_order le)
+  ∧ (well_founded_order (order_le k))
+  ∧ (directs_pred k x le)
+  ∧ (le_vnn k n → is_maximal k le (pred k n))
+  := sorry"
+16,1609.083,"\begin{lemma}\label{isomsl+sl}
+The homomorphism $\tilde{\chi}$ restricts to an isomorphism
+\begin{equation}\label{defchi}
+\chi: \SL_+(\Gamma_4(\R)) \rightarrow \SL_2(\h(\R)).
+\end{equation}
+\end{lemma}","lemma lemma_isom_sl_plus_sl :
+  isomorphism (restriction tilde_chi (SL_plus (Gamma_4 ℝ))) (SL_2 (H ℝ)) 
+  := sorry"
+5,1307.2937,"\begin{lemma} \label{L:valuation ring}
+With notation as in Definition~\ref{D:norm field},
+for $\overline{x}, \overline{y} \in \gotho_{K'}$, $\overline{x}$ is divisible by $\overline{y}$ if and only if
+$\left|\overline{x}\right|' \leq \left|\overline{y}\right|'$.
+\end{lemma}","lemma lemma_valuation_ring
+  (o_K' : Type*) [def_norm_field K']
+  (x_bar y_bar : o_K') :
+  (x_bar ∣ y_bar) ↔ (norm_val' x_bar ≤ norm_val' y_bar) := sorry"
+0,711.2008,"\begin{theo} {\bf (Schneider-Teitelbaum)}\label{ST1} Given a compact locally $L$-analytic group $G$ the
+algebra $\Dg$ of $K$-valued locally analytic distributions on $G$ is Fr\'echet-Stein.
+\end{theo}","  
+theorem ST1
+  (G : Type*)
+  [compact_locally_L_analytic_group G]
+  [D : algebra_of_K_valued_locally_analytic_distributions_on_G G K] :
+  is_Frechet_Stein D := sorry"
+1,711.2008,"\begin{theo}{\bf (Schneider-Teitelbaum)}\label{ST2}
+If $G_0$ is a $d$-dimensional locally $\Q_p$-analytic group and
+uniform pro-$p$ then there is an isomorphism of $\gor K$-algebras
+\[\gr\Dgor\stackrel{\sim}{\longrightarrow} (\gor K)[X_1,...,X_d],~\sigma(b_i)\mapsto
+X_i.\]
+\end{theo}","theorem ST2
+  (G_0 : Type*) [locally_Qp_analytic_group p G_0]
+  (hG_0 : uniform_pro p G_0)
+  (d := dimension_of G_0)
+  (lhs := gr_K_algebra (gr_r (D_r G_0 K)))
+  (rhs := gr_K_algebra (gr K {X i | i ∈ finset.range d}))
+  (σ := (b i ↦ X i)) :
+  is_isomorphism lhs rhs σ
+  := sorry"
+0,1005.3825,"\begin{prop} (\cite{De97}, \cite{Fl99})
+Suppose that \eqnref{50}, \eqnref{51} hold. Then, $\P$-a.s.
+$$
+d_f(\A (\ome ))<+\infty,
+$$
+where
+$$
+d_f(K)\doteq \dis \limsup _{\eps \rightarrow 0}\frac{\log N_{\eps
+}(K)}{\log (1/\eps )}
+$$
+denotes the fractal dimension of a compact set $K\subset\B ,$
+where $N_{\eps }(K)$ is the minimum number of balls of radius
+$\eps $ necessary to cover $K.$ \label{L}
+\end{prop}","lemma prop_fl99
+  (h50 : eqn_50_holds)
+  (h51 : eqn_51_holds)
+  (N : λ ε K (hk : is_compact K), min_open_cover ε K)
+  (d_f := λ (K : B) (hk : is_compact K), limsup (λ ε, (log N ε K) / (log (1 / ε))) (nhds 0)) :
+  ∀ (ω : P), (almost_surely P (λ (ω : P), (fractal_dimension (A ω)) < ∞))
+  := sorry"
+2,1005.3825,"\begin{lem}[$L^p$ Poincar\'e's Inequality]   Suppose $v\in C^1((0,L);\R)$, for some $L>0$,
+with $v(0)=0$; then
+$$|v|_{L^p}\le L |Dv|_{L^p}, \mbox{ for all }p\ge1.$$
+\label{gPoincare}
+\end{lem}","lemma lp_poincare_inequality
+  (L : ℝ) (hL : L > 0)
+  (v : C_1 (Ioo 0 L) ℝ) (hv' : v 0 = 0) :
+  ∀ (p : ℝ) (hp : p ≥ 1),
+  norm_lp L p v ≤ L * norm_lp L p (D v)
+  := sorry"
+3,1005.3825,"\begin{lem}[Laplacian and Odd Power Integral Inequality]
+Suppose $v\in C^2((0,L);\R)$, for some $L>0$, with $v(0)=v(L)=0$; then
+$$\int_0^L \frac{\partial^2v}{\partial x^2}\cdot v^{2p-1}dx\le-\frac{(2p-1)}{p^2L}|v|^{2p}_{L^{2p}}\mbox{ for all }p\ge1.$$
+If   $v\in C^1((0,L);\R)$, for some $L>0$, with $v(0)=0$; then
+$$-\int_0^L \frac{\partial v}{\partial x}\cdot \frac{\partial v^{2p-1}}{\partial x}dx\le-\frac{(2p-1)}{p^2L}|v|^{2p}_{L^{2p}}\mbox{ for all }p\ge1.$$
+\label{inprd}
+\end{lem}","lemma laplacian_odd_power_integral_inequality
+  (L : ℝ) (hL : L > 0)
+  (v : Ioo 0 L → ℝ)
+  (p : ℝ) (hp : p ≥ 1) :
+  (v 0 = 0) ∧ (v L = 0) ∧ (C_2 (Ioo 0 L) ℝ v) → ∫ x, (pderiv x (pderiv x v)) * (λ x', (v x')^(2 * p - 1)) ≤ (-(2 * p - 1) / (p^2 * L)) * (norm_lp (L^2*p) v)^(2*p)
+  ∧ (v 0 = 0) (C_1 (Ioo 0 L) ℝ v) → - ∫ x, (pderiv x v) * (pderiv x (λ x', (v x')^(2 * p - 1))) ≤ (-(2 * p - 1) / (p^2 * L)) * (norm_lp (L^2*p) v)^(2*p)
+  := sorry"
+4,1005.3825,"\begin{lem}
+With the notations above, we have
+\begin{equation}
+\int_\Rd u_0(y)\frac{\partial}{\partial x}p_t(x,y)dy\le K.
+\label{707}
+\end{equation}
+for some universal constant $K>0$ whenever $u_0$ is Lipschitz.
+\label{derbd}
+\end{lem}","lemma derbd
+  (u_0 : ℝd → ℝ)
+  (hLipschitz : is_lipschitz u_0) :
+  ∃ (K : ℝ) (hK : K > 0), (∫ y, (λ x, (u_0 y * ((pderiv_x p_t x y)))) ∂y) ≤ K
+  := sorry"
+5,1206.362,"\begin{prop}
+Suppose $\calh$ is a cocommutative and free associative algebra where $K_a$, defined by $a^{-n}\Psi^a(b)=\sum_{b'} K_a(b,b')b'$, is a transition matrix. Then, for each unordered $n$-tuple $\left\{c_1,c_2,\dots,c_n\right\}$ of degree 1 elements (some $c_i$s may be identical), the uniform distribution on $\left\{c_{\sigma(1)}c_{\sigma(2)}\dots c_{\sigma(n)}|\sigma \in S_n \right\}$ is a stationary distribution for the associated chain. In particular, all absorbing states have the form $\bullet ^n$, where $\bullet\in\calb_1$.
+\label{stationary}
+\end{prop}","lemma stationary
+  {H : Type*}
+  [cocommutative_algebra H]
+  [free_associative_algebra H]
+  {a : H}
+  (K_a : transition_matrix H)
+  (c : fin n → H)
+  (hc : ∀ i, degree (c i) = 1) :
+  stationary_distribution (associated_chain H K_a c) (uniform_distribution (set.unordered_tuples c))
+  ∧ (∀ (b : H) (hb : is_absorbing_state H K_a b), ∃ (b_1 : H) (n : ℕ) (hb_1 : degree b_1 = 1), b = b_1^n)
+  := sorry"
+0,1811.0535,"\begin{lemma}[{\cite{Kopt_mc14}}]\label{lem_LM}
+Let $u=e^{-x/\eps}$ be the exact solution of %equation~
+\eqref{spp} posed
+in  $\Omega\supset\mathring{\Omega}$,
+a triangulation $\mathcal T$ in $\Omega$
+include a
+subtriangulation $\mathring{\mathcal T}$ of type C in  $\mathring\Omega$
+subject to \eqref{Omega_0},
+and $U$ be the finite element solution on $\mathcal T$ obtained using  linear elements  without quadrature or with the lumped-mass quadrature.
+%
+For any positive constant $C_2$,
+there exist sufficiently small constants $C_0$ and  $C_1$  such that
+if %$\frac h{\eps}
+$N_0^{-1}\le C_1$
+and
+$\eps\le C_2 H$,
+%  $\frac {\eps^2}{H^2}\le C_2 $, %\frac h{\eps}$,
+then\vspace{-0.2cm}
+%the error $\ge C_0 \frac h{\eps}$
+\beq\label{Uu_LM_bound}
+\max_{\bar\Omega}|U-u|  \ge %C_0{\ts\frac h{\eps}}=
+C_0 N_0^{-1}.
+\eeq
+\end{lemma}","lemma lemma_lm
+  (Ω : type_Ω)
+  (Ω_circle : set Ω)
+  (T : triangulation Ω)
+  (T_circle : subtriangulation_type_C Ω_circle T)
+  (hT_circle : subject_to_omega_0 T_circle Ω_circle)
+  (u : dom_u → range_u := λ x, exp (-x / ε))
+  [exact_solution_spp u]
+  (U : type_U)
+  (hU : linear_elements_without_quadrature_or_with_lumped_mass_quadrature U) :
+  ∀ (C_2 : ℝ) (hC_2 : C_2 > 0), 
+  ∃ (C_0 C_1 : ℝ) (hC_0 : C_0 > 0) (hC_1 : C_1 > 0),
+  (N_0 ^ (-1) ≤ C_1) ∧ (ε ≤ C_2 * H) → 
+  max_on_set (bar Ω) (abs (U - u)) ≥ C_0 * (N_0 ^ (-1))
+  := sorry"
+5,1809.0724,"\begin{lemma}
+\label{lem:walk-in-tree}
+For all $\varepsilon>0$, with probability $1-o(1)$, for all $x\in\cR$ and $y\in\cR\setminus \cB_x$, we have
+$$
+\sum_{u\in\partial\cT_x\setminus \cF_x}\bw(u)+\sum_{v\in\partial\cT_y\setminus \cF_y}\bw(v)\leq \varepsilon\, .
+$$
+\end{lemma}","lemma walk_in_tree 
+  {ε : ℝ} 
+  (hε: ε > 0):
+  prob (∀ (x y: R)
+  (hx: x ∈ Γ) 
+  (hy: y ∈ set_diff R Γ),
+  ∑ u: (set_diff boundary (T x) (F x)), weight(u) + ∑ v: (set_diff boundary (T y) (F y)), weight(u) ≤ ε) = 1 - o 1 
+  := sorry  "
+6,1809.0724,"\begin{lemma}
+\label{lem:mix-communities}
+For all $\varepsilon>0$, with probability $1-o(1)$, for all $x\in\cR$ and $y\in\cR\setminus \cB_x$,
+$$
+1\leq (N_0-p)\frac{N}{N_0^2}\W_{0,0} +(N_1-p)\frac{N}{N_1^2}\W_{1,1} +\frac{pN}{N_0 N_1}\left(\W_{0,1}+\W_{1,0}\right)+\varepsilon \, .
+$$
+\end{lemma}","lemma mix_communities :
+  with_probability (1 - o (1))
+  (∀ (ε : ℝ) (hε : ε > 0), 
+   ∀ (x : cR) (y : set_diff cR (B x)),
+  1 ≤ (N_0 - p) * (N / (N_0^2)) * W_00 + (N_1 - p) * (N / (N_1^2)) * W_11 + (p * N / (N_0 * N_1)) * (W_01 + W_10) + ε)
+  := sorry"
